@@ -1,10 +1,32 @@
+{% load staticfiles %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>sport</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/sport.css' %}">
+    <link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div class="page-header">
+    <h1><a href="/">sport</a></h1>
+</div>
 
+<div class="content container">
+    <div class="row">
+        <div class="col-md-8">
+            {% for comp in competitions %}
+                <div class="comp">
+                    <div class="date">
+                        <p>date: {{ comp.event_date }}</p>
+                    </div>
+                    <h1><a href="">{{ comp.name }}</a></h1>
+                    <p>{{ comp.location|linebreaks }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 </body>
 </html>

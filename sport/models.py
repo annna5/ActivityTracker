@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
 from django.db import models
 
 
-class Result(models.Model):
-    score = models.IntegerField(blank=True)
-
-    def __str__(self):
-        return self.score
+# class Result(models.Model):
+#     score = models.IntegerField(blank=True, null=True)
+#
+#     def __str__(self):
+#         return self.score
 
 
 # class DistanceResult(Result):
@@ -20,6 +20,7 @@ class Result(models.Model):
 #
 # class TypeOfMeasure(models.Model):
 #     TIME, DISTANCE = range(2)
+from django.utils import timezone
 
 
 class Discipline(models.Model):
@@ -31,13 +32,12 @@ class Discipline(models.Model):
 
     def __str__(self):
         return self.name.encode('utf-8')
- 
+
 
 class Competition(models.Model):
     name = models.CharField(max_length=100)
-    models.Field
     location = models.CharField(max_length=100)
-    event_date = models.DateField()
+    event_date = models.DateField(default=timezone.now())
     event_time = models.TimeField(default='08:00')
     discipline = models.ForeignKey(Discipline)
     # if discipline.type_of_measure == TypeOfMeasure.TIME:
@@ -46,10 +46,13 @@ class Competition(models.Model):
     #     result = models.ForeignKey(DistanceResult, blank=True, default=0)
 
     # result = models.ForeignKey(Result, default=0, null=True)
-    result = models.IntegerField(blank=True, null=True)
-    place = models.IntegerField(blank=True, null=True)
-    numberOfParticipants = models.IntegerField(blank=True, null=True)
-    personalNotes = models.TextField(blank=True, null=True)
+
+
+
+    # result = models.DurationField(default='00:00')
+    # place = models.IntegerField(blank=True, null=True)
+    # numberOfParticipants = models.IntegerField(blank=True, null=True)
+    # personalNotes = models.TextField(blank=True, null=True)
 
     # def __init__(self, name, location, event_date, event_time):
     #     models.Model.__init__(self)
@@ -59,17 +62,17 @@ class Competition(models.Model):
     #     self.event_time = event_time
     #     self.save()
 
-    def set_place(self, place):
-        self.place = place
-        self.save()
-
-    def set_number_of_participants(self, numb):
-        self.numberOfParticipants = numb
-        self.save()
-
-    def set_personal_notes(self, notes):
-        self.personalNotes = notes
-        self.save()
+    # def set_place(self, place):
+    #     self.place = place
+    #     self.save()
+    #
+    # def set_number_of_participants(self, numb):
+    #     self.numberOfParticipants = numb
+    #     self.save()
+    #
+    # def set_personal_notes(self, notes):
+    #     self.personalNotes = notes
+    #     self.save()
 
     def __str__(self):
         return self.name.encode('utf-8')
