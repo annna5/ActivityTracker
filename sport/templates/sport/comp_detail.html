@@ -1,0 +1,13 @@
+{% extends 'sport/base.html' %}
+
+{% block content %}
+    <div class="comp">
+{#        {% if post.published_date %}#}
+            <div class="date">
+                {{ comp.event_date }}
+            </div>
+{#        {% endif %}#}
+        <h1>{{ comp.name }}</h1>
+        <p>{{ comp.location|linebreaks }}</p>
+    </div>
+{% endblock %}
