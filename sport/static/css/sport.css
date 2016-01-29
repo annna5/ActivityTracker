@@ -1,14 +1,18 @@
 h1 a {
     color: #FCA205;
-    font-family: 'Lobster';
+    font-family: 'Oswald', sans-serif;
 }
 
 body {
     padding-left: 15px;
+    margin-top: 60px;
+    /*background-color: antiquewhite;*/
+    /*background: #333;*/
+    background: white;
 }
 
 .page-header {
-    background-color: #ff9400;
+    background-color: black;
     margin-top: 0;
     padding: 20px 20px 20px 40px;
 }
@@ -24,7 +28,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-    'Open Sans Condensed', sans-serif;
+'Open Sans Condensed', sans-serif;
 }
 
 .date {
@@ -53,4 +57,55 @@ h1, h2, h3, h4 {
 
 .post h1 a, .post h1 a:visited {
     color: #000000;
+}
+
+.glyphicon {
+    font-size: 70px;
+}
+
+#cssmenu {
+    background: #333;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 20%;
+    float:left;
+}
+
+#cssmenu li {
+    font: 100% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+}
+
+#cssmenu a {
+    background: #333;
+    border-bottom: 1px solid #393939;
+    color: white;
+    margin: 0;
+    padding: 8px 12px;
+    text-decoration: none;
+    font-weight: normal;
+    height: 4em;
+    font-size: medium;
+    display: flex;
+    align-items: center;
+}
+
+#cssmenu a:hover {
+    background: black url("../images/hover.gif") left center no-repeat;
+    color: #fff;
+    padding-bottom: 8px;
+    display: flex;
+}
+
+.container {
+    background-color: antiquewhite;
+    position: relative;
+    width: 75%;
+    margin: 0;
+     overflow: hidden;
+    padding: 10px 30px;
 }

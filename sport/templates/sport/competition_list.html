@@ -1,13 +1,30 @@
 {% extends 'sport/base.html' %}
 
 {% block content %}
-    {% for comp in competitions %}
-        <div class="comp">
-            <div class="date">
-                <p>date: {{ comp.event_date }}</p>
-            </div>
-            <h1><a href="{% url 'comp_detail' pk=comp.pk %}">{{ comp.name }}</a></h1>
-            <p>{{ comp.location|linebreaks }}</p>
-        </div>
-    {% endfor %}
+
+    <table style="width:100%">
+        <tr>
+            <td>date</td>
+            <td>discipline</td>
+            <td>name</td>
+            <td>distance</td>
+            <td>score</td>
+            {#            link do notatek#}
+        </tr>
+        {% for comp in competitions %}
+            {#            <div class="date">#}
+            {#                <p>date: {{ comp.event_date }}</p>#}
+
+            {#            </div>#}
+
+            <tr>
+                <td>{{ comp.event_date }}</td>
+                <td>{{ comp.discipline }}</td>
+                <td><a href="{% url 'comp_detail' pk=comp.pk %}">{{ comp.name }}</a></td>
+                <td>{{ comp.distance }}</td>
+                <td>{{ comp.score }}</td>
+                {#            link do notatek#}
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

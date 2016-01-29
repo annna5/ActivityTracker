@@ -1,4 +1,10 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, redirect, render_to_response
+from django.template.context_processors import csrf
+from django.utils.safestring import mark_safe
+
+from sport.utils.Calendar import Calendar
 from .models import Competition
 from .forms import CompetitionForm
 from django.contrib.auth.decorators import login_required
@@ -6,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def competition_list(request):
-    competitions = Competition.objects.order_by('event_date')
+    competitions = Competition.objects.order_by('event_date').filter(author=request.user)
     return render(request, 'sport/competition_list.html', {
 
         'competitions': competitions
@@ -25,7 +31,7 @@ def competition_new(request):
         form = CompetitionForm(request.POST)
         if form.is_valid():
             comp = form.save(commit=False)
-            # post.author = request.user
+            comp.author = request.user
             # post.published_date = timezone.now()
             comp.save()
             return redirect('comp_detail', pk=comp.pk)
@@ -41,10 +47,54 @@ def comp_edit(request, pk):
         form = CompetitionForm(request.POST, instance=comp)
         if form.is_valid():
             comp = form.save(commit=False)
-            # comp.author = request.user
+            comp.author = request.user
             # comp.published_date = timezone.now()
             comp.save()
             return redirect('comp_detail', pk=comp.pk)
     else:
         form = CompetitionForm(instance=comp)
     return render(request, 'sport/comp_edit.html', {'form': form})
+
+
+@login_required
+def comp_remove(request, pk):
+    comp = get_object_or_404(Competition, pk=pk)
+    comp.delete()
+    return redirect('sport.views.competition_list')
+
+
+# @login_required
+# def competition_list_for_distance(request):
+#     competitions = Competition.objects.order_by('event_date').filter(author=request.user).filter(dis)
+#     return render(request, 'sport/competition_list.html', {
+#         'competitions': competitions
+#     })
+
+
+@login_required
+def calendar(request): #, year, month):
+    activities = Competition.objects.order_by('event_date').filter(
+            event_date__year=2016, event_date__month=1
+    )
+    cal = Calendar(activities).formatmonth(2016, 1)
+    return render_to_response('sport/calendar.html', {'calendar': mark_safe(cal),})
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/accounts/register/complete')
+
+    else:
+        form = UserCreationForm()
+    token = {}
+    token.update(csrf(request))
+    token['form'] = form
+
+    return render_to_response('registration/registration_form.html', token)
+
+
+def registration_complete(request):
+    return render_to_response('registration/registration_complete.html')

@@ -1,9 +1,55 @@
+
 {% extends 'sport/base.html' %}
 
 {% block content %}
-    <h1>New competition</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
+{#    <script>#}
+{#        function choose_proper_score_field(disc) {#}
+{#            if (disc == 'skok') {#}
+{##}
+{#                document.getElementById('quantity_score').addClass('hidden');#}
+{#                document.getElementById('time_score').addClass('hidden');#}
+{#                document.getElementById('distance_score').removeClass('hidden');#}
+{##}
+{#            } else if (disc == 'biegi') {#}
+{##}
+{#                document.getElementById('quantity_score').addClass('hidden');#}
+{#                document.getElementById('time_score').removeClass('hidden');#}
+{#                document.getElementById('distance_score').addClass('hidden');#}
+{#            } else {#}
+{#                document.getElementById('quantity_score').removeClass('hidden');#}
+{#                document.getElementById('time_score').addClass('hidden');#}
+{#                document.getElementById('distance_score').addClass('hidden');#}
+{#            }#}
+{#        }#}
+{##}
+{#        $(document).ready(function () {#}
+{#            document.getElementById('discipline').change(function () {#}
+{#                choose_proper_score_field(this.value);#}
+{#            });#}
+{#        });#}
+{##}
+{#    </script>#}
+
+
+{#    <h1>New competition</h1>#}
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Save</button>
+
+
+
+
+{#        {{ form.name }}#}
+{#        {{ form.event_date }}#}
+{#        <div id="discipline">{{ form.discipline }}</div>#}
+{#        <div id="quantity_score">{{ form.quantity_score }}</div>#}
+{#        <div id="time_score">{{ form.time_score }}</div>#}
+{#        <div id="distance_score">{{ form.distance_score }}</div>#}
+{#        {{ form.notes }}#}
+{#            <button type="submit" class="btn btn-primary">#}
+{#               Save#}
+{#            </button>#}
     </form>
 {% endblock %}

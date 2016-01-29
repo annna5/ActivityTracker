@@ -1,12 +1,13 @@
 {% extends "sport/base.html" %}
-
-{% block title %}Create an account{% endblock %}
-
+{% block title %}Register{% endblock %}
 {% block content %}
-  <h1>Create an account</h1>
 
-  <form action="" method="post">
-      {{ form.as_p }}
-      <input type="submit" value="Create the account">
+  <h2>Registration</h2>
+
+  <form action="/accounts/register/" method="post">{% csrf_token %}
+    {{form.as_p}}
+  <input type="submit" value="Register" />
+
   </form>
+
 {% endblock %}

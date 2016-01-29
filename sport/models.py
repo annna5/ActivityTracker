@@ -2,7 +2,6 @@
 
 from django.db import models
 
-
 # class Result(models.Model):
 #     score = models.IntegerField(blank=True, null=True)
 #
@@ -10,36 +9,40 @@ from django.db import models
 #         return self.score
 
 
-# class DistanceResult(Result):
-#     score = models.IntegerField(default=0)
 
-
-# class TimeResult(Result):
-#     score = models.TimeField(default='00:00')
-
-#
-# class TypeOfMeasure(models.Model):
-#     TIME, DISTANCE = range(2)
 from django.utils import timezone
+
+
+class Typeofmeasure(models.Model):
+    name = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return self.name.encode('utf-8')
 
 
 class Discipline(models.Model):
     name = models.CharField(max_length=100, blank=True)
-    # type_of_measure = models.Field(TypeOfMeasure)
-    # def __init__(self, name):
-    #     models.Model.__init__(self)
-    #     self.name = name
+    typeofmeasure = models.ForeignKey('Typeofmeasure', on_delete=models.CASCADE)
+
 
     def __str__(self):
         return self.name.encode('utf-8')
 
 
 class Competition(models.Model):
+    author = models.ForeignKey('auth.User')
     name = models.CharField(max_length=100)
-    location = models.CharField(max_length=100)
-    event_date = models.DateField(default=timezone.now())
-    event_time = models.TimeField(default='08:00')
+    event_date = models.DateField(default='2016-01-01')
     discipline = models.ForeignKey(Discipline)
+    distance = models.DecimalField(max_digits=8, decimal_places=4, default=0)
+    notes = models.TextField(max_length=1000, null=True) # location, time, fee
+
+    score = models.DurationField(default='00:00')
+
+    # quantity_score = models.IntegerField(default=0)
+    # time_score = models.TimeField(default='00:00')
+    # distance_score = models.DecimalField(default=0, decimal_places=2, max_digits=10)
+
     # if discipline.type_of_measure == TypeOfMeasure.TIME:
     #     result = models.ForeignKey(TimeResult, blank=True, default='00:00')
     # else:

@@ -10,9 +10,13 @@
         {#        {% endif %}#}
         {% if user.is_authenticated %}
             <a class="btn btn-default" href="{% url 'comp_edit' pk=comp.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a class="btn btn-default" href="{% url 'comp_remove' pk=comp.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+
         {% endif %}
         <h1>{{ comp.name }}</h1>
-        <p>{{ comp.location }}</p>
+        <p>date: {{ comp.event_date }}</p>
         <p>{{ comp.discipline }}</p>
+        <p>distance: {{ comp.distance }}</p>
+        <p>score: {{ comp.score }}</p>
     </div>
 {% endblock %}
