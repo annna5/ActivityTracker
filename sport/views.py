@@ -1,3 +1,4 @@
+import datetime
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
@@ -63,6 +64,26 @@ def comp_remove(request, pk):
     return redirect('sport.views.competition_list')
 
 
+@login_required
+def upcoming_events(request):
+    competitions = Competition.objects.order_by('event_date').filter(author=request.user).filter(
+        event_date__gte=datetime.datetime.now())
+    return render(request, 'sport/upcoming_events.html', {
+
+        'competitions': competitions
+    })
+
+
+@login_required
+def old_events(request):
+    competitions = Competition.objects.order_by('event_date').filter(author=request.user).filter(
+        event_date__lt=datetime.datetime.now())
+    return render(request, 'sport/old_events.html', {
+
+        'competitions': competitions
+    })
+
+
 # @login_required
 # def competition_list_for_distance(request):
 #     competitions = Competition.objects.order_by('event_date').filter(author=request.user).filter(dis)
@@ -72,12 +93,29 @@ def comp_remove(request, pk):
 
 
 @login_required
-def calendar(request): #, year, month):
+def calendar(request):  # , year, month):
     activities = Competition.objects.order_by('event_date').filter(
             event_date__year=2016, event_date__month=1
     )
     cal = Calendar(activities).formatmonth(2016, 1)
     return render_to_response('sport/calendar.html', {'calendar': mark_safe(cal),})
+
+
+@login_required
+def statistics(request):
+    distances = list(Competition.objects
+                     .filter(author=request.user).order_by()
+                     .values_list('distance', flat=True).distinct())
+    distances.sort()
+    dist_dict = {}
+    for dist in distances:
+        dist_dict[dist] = Competition.objects.filter(author=request.user).filter(distance=dist)
+
+    competitions = dist_dict
+    return render(request, 'sport/statistics.html', {
+
+        'competitions': competitions
+    })
 
 
 def register(request):

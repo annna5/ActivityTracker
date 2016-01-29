@@ -3,7 +3,10 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.competition_list, name='competition_list'),
-    url(r'^sport/templates/sport/calendar.html/$', views.calendar),
+    url(r'^upcoming_events$', views.upcoming_events, name='upcoming_events'),
+    url(r'^old_events$', views.old_events, name='old_events'),
+    url(r'^calendar$', views.calendar, name='calendar'),
+    url(r'^statistics', views.statistics, name='statistics'),
     # url(r'^sport/templates/sport/my_calendar.html$', views.calendar, name='my_calendar'),
     url(r'^comp/(?P<pk>[0-9]+)/$', views.comp_detail, name='comp_detail'),
     url(r'^comp/new/$', views.competition_new, name='competition_new'),
