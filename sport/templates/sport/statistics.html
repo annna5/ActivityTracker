@@ -5,27 +5,8 @@
 
         {% for key, values in competitions.items %}
             <br/>
-            distance: {{ key }}
-            <table style="width:100%">
-        <tr>
-            <td>date</td>
-            <td>discipline</td>
-            <td>name</td>
-            <td>distance</td>
-            <td>score</td>
-            {#            link do notatek#}
-        </tr>
-            {% for dist in values %}
-                <tr>
-                    <td>{{ dist.event_date }}</td>
-                    <td>{{ dist.discipline }}</td>
-                    <td><a href="{% url 'comp_detail' pk=dist.pk %}">{{ dist.name }}</a></td>
-                    <td>{{ dist.distance }}</td>
-                    <td>{{ dist.score }}</td>
-                    {#            link do notatek#}
-                </tr>
-            {% endfor %}
-            </table>
+            distance: <a href="{% url 'comp_list_for_dist' dist=key %}">{{ key }}</a>
+
         {% endfor %}
 
 {% endblock %}

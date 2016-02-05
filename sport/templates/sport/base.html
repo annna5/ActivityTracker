@@ -43,8 +43,8 @@
         <li class='active'><a href='/'><span>Home</span></a></li>
         <li><a href='/calendar'><span>Calendar</span></a></li>
         <li><a href='/statistics'><span>Statistics</span></a></li>
-        <li><a href='/upcoming_events'><span>Upcoming Events</span></a></li>
-        <li class='last'><a href='/old_events'><span>Old Events</span></a></li>
+        <li><a href="{% url 'events_from_date' lower=False %}"><span>Upcoming Events</span></a></li>
+        <li class='last'><a href="{% url 'events_from_date' lower=True %}"><span>Old Events</span></a></li>
     </ul>
 </div>
 

@@ -68,28 +68,35 @@ def comp_remove(request, pk):
 def upcoming_events(request):
     competitions = Competition.objects.order_by('event_date').filter(author=request.user).filter(
         event_date__gte=datetime.datetime.now())
-    return render(request, 'sport/upcoming_events.html', {
+    return render(request, 'sport/competition_list.html', {
 
         'competitions': competitions
     })
 
 
 @login_required
-def old_events(request):
-    competitions = Competition.objects.order_by('event_date').filter(author=request.user).filter(
-        event_date__lt=datetime.datetime.now())
-    return render(request, 'sport/old_events.html', {
+def events_from_date(request, lower):
+    if lower == "True":
+        competitions = Competition.objects.order_by('event_date').filter(author=request.user).filter(
+            event_date__lt=datetime.datetime.now())
+    else:
+        competitions = Competition.objects.order_by('event_date').filter(author=request.user).filter(
+            event_date__gte=datetime.datetime.now())
+
+    return render(request, 'sport/competition_list.html', {
 
         'competitions': competitions
     })
 
 
-# @login_required
-# def competition_list_for_distance(request):
-#     competitions = Competition.objects.order_by('event_date').filter(author=request.user).filter(dis)
-#     return render(request, 'sport/competition_list.html', {
-#         'competitions': competitions
-#     })
+@login_required
+def comp_list_for_dist(request, dist):
+    competitions = Competition.objects.order_by('event_date').filter(author=request.user).filter(
+        distance=dist)
+    return render(request, 'sport/statistics_for_specific_dist.html', {
+
+        'competitions': competitions
+    })
 
 
 @login_required
