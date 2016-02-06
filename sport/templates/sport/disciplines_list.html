@@ -1,0 +1,13 @@
+
+{% extends 'sport/base.html' %}
+
+{% block content %}
+
+
+        {% for d in disciplines %}
+            <br/>
+            <a href="{% url 'comp_list_for_discipline' disc=d.name %}">{{ d.name }}</a>
+
+        {% endfor %}
+
+{% endblock %}

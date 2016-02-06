@@ -6,7 +6,7 @@ from django.template.context_processors import csrf
 from django.utils.safestring import mark_safe
 
 from sport.utils.Calendar import Calendar
-from .models import Competition
+from .models import Competition, Discipline
 from .forms import CompetitionForm
 from django.contrib.auth.decorators import login_required
 
@@ -67,7 +67,7 @@ def comp_remove(request, pk):
 @login_required
 def upcoming_events(request):
     competitions = Competition.objects.order_by('event_date').filter(author=request.user).filter(
-        event_date__gte=datetime.datetime.now())
+            event_date__gte=datetime.datetime.now())
     return render(request, 'sport/competition_list.html', {
 
         'competitions': competitions
@@ -78,10 +78,10 @@ def upcoming_events(request):
 def events_from_date(request, lower):
     if lower == "True":
         competitions = Competition.objects.order_by('event_date').filter(author=request.user).filter(
-            event_date__lt=datetime.datetime.now())
+                event_date__lt=datetime.datetime.now())
     else:
         competitions = Competition.objects.order_by('event_date').filter(author=request.user).filter(
-            event_date__gte=datetime.datetime.now())
+                event_date__gte=datetime.datetime.now())
 
     return render(request, 'sport/competition_list.html', {
 
@@ -92,20 +92,29 @@ def events_from_date(request, lower):
 @login_required
 def comp_list_for_dist(request, dist):
     competitions = Competition.objects.order_by('event_date').filter(author=request.user).filter(
-        distance=dist)
+            distance=dist)
     return render(request, 'sport/statistics_for_specific_dist.html', {
 
         'competitions': competitions
     })
 
 
+# @login_required
+# def calendar(request):  # , year, month):
+#     activities = Competition.objects.order_by('event_date').filter(
+#             event_date__year=2016, event_date__month=1
+#     )
+#     cal = Calendar(activities).formatmonth(2016, 1)
+#     return render_to_response('sport/calendar.html', {'calendar': mark_safe(cal),})
+
 @login_required
 def calendar(request):  # , year, month):
-    activities = Competition.objects.order_by('event_date').filter(
-            event_date__year=2016, event_date__month=1
-    )
-    cal = Calendar(activities).formatmonth(2016, 1)
-    return render_to_response('sport/calendar.html', {'calendar': mark_safe(cal),})
+    disciplines = Discipline.objects.all()
+
+    return render(request, 'sport/disciplines_list.html', {
+
+        'disciplines': disciplines
+    })
 
 
 @login_required
@@ -143,3 +152,20 @@ def register(request):
 
 def registration_complete(request):
     return render_to_response('registration/registration_complete.html')
+
+
+def comp_list_for_discipline(request, disc):
+    distances = list(Competition.objects
+                     .filter(author=request.user, discipline__name=disc).order_by()
+                     .values_list('distance', flat=True).distinct())
+
+    distances.sort()
+    dist_dict = {}
+    for dist in distances:
+        dist_dict[dist] = Competition.objects.filter(author=request.user, distance=dist, discipline__name=disc)
+
+    competitions = dist_dict
+    return render(request, 'sport/statistics.html', {
+
+        'competitions': competitions
+    })
