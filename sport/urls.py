@@ -4,8 +4,11 @@ from . import views
 urlpatterns = [
     url(r'^$', views.competition_list, name='competition_list'),
     url(r'^events_from_date/(?P<lower>\w+)', views.events_from_date, name='events_from_date'),
+    url(r'^sorted_view/(?P<field>\w+)', views.sorted_view, name='sorted_view'),
+    url(r'^filtered_view_discipline/(?P<field>\w+)', views.filtered_view_discipline, name='filtered_view_discipline'),
     url(r'^calendar$', views.calendar, name='calendar'),
     url(r'^statistics', views.statistics, name='statistics'),
+    url(r'^disciplines', views.disciplines, name='disciplines'),
 
     url(r'^comp_list_for_discipline/(?P<disc>\w+)/$', views.comp_list_for_discipline, name='comp_list_for_discipline'),
 

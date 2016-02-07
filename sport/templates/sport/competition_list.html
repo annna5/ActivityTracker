@@ -4,6 +4,20 @@
 
     <table style="width:100%">
         <tr>
+            <td>
+                <a href="{% url 'sorted_view' field='event_date' %}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+            </td>
+            <td>
+
+            </td>
+            <td><a href="{% url 'sorted_view' field='name' %}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+            </td>
+            <td><a href="{% url 'sorted_view' field='distance' %}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+            </td>
+            <td><a href="{% url 'sorted_view' field='score' %}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+            </td>
+        </tr>
+        <tr>
             <td>date</td>
             <td>discipline</td>
             <td>name</td>

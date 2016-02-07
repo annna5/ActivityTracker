@@ -88,6 +88,23 @@ def events_from_date(request, lower):
         'competitions': competitions
     })
 
+@login_required
+def sorted_view(request, field):
+    competitions = Competition.objects.order_by(field, 'event_date').filter(author=request.user)
+
+    return render(request, 'sport/competition_list.html', {
+
+        'competitions': competitions
+    })
+
+@login_required
+def filtered_view_discipline(request, field):
+    competitions = Competition.objects.order_by('event_date').filter(author=request.user, discipline__name=field)
+
+    return render(request, 'sport/competition_list.html', {
+
+        'competitions': competitions
+    })
 
 @login_required
 def comp_list_for_dist(request, dist):
@@ -131,6 +148,15 @@ def statistics(request):
     return render(request, 'sport/statistics.html', {
 
         'competitions': competitions
+    })
+
+@login_required
+def disciplines(request):
+    disciplines = Discipline.objects.all()
+
+    return render(request, 'sport/disciplines.html', {
+
+        'disciplines': disciplines
     })
 
 

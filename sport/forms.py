@@ -10,3 +10,6 @@ class CompetitionForm(forms.ModelForm):
         required_css_class = 'required'
         fields = ('name', 'discipline', 'distance', 'score', 'event_date', 'notes')
 
+
+class DisciplineForm(forms.ModelForm):
+    pass
