@@ -7,7 +7,7 @@ from django.utils.safestring import mark_safe
 
 from sport.utils.Calendar import Calendar
 from .models import Competition, Discipline
-from .forms import CompetitionForm
+from .forms import CompetitionForm, DisciplineForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -39,6 +39,18 @@ def competition_new(request):
     else:
         form = CompetitionForm()
     return render(request, 'sport/comp_edit.html', {'form': form})
+
+@login_required
+def discipline_new(request):
+    if request.method == "POST":
+        form = DisciplineForm(request.POST)
+        if form.is_valid():
+            comp = form.save(commit=False)
+            comp.save()
+            return redirect('disciplines')
+    else:
+        form = DisciplineForm()
+    return render(request, 'sport/discipline_new.html', {'form': form})
 
 
 @login_required

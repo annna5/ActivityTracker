@@ -3,28 +3,15 @@
 {% block content %}
 
 
-                <div class="dropdown">
-                    <button class="dropbtn">---</button>
-                    <div class="dropdown-content">
-                        {% for disc in disciplines %}
-                            <a href="{% url 'filtered_view_discipline' field=disc.name %}">{{ disc.name }}</a>
-                        {% endfor %}
-                    </div>
-                </div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-
-
-
-
-    {#    #}
-    {#    #}
-    {#    #}
-    {#    #}
-    {#    #}
+    <div class="dropdown">
+        <button class="dropbtn">---</button>
+        <div class="dropdown-content">
+            {% for disc in disciplines %}
+                <a href="{% url 'filtered_view_discipline' field=disc.name %}">{{ disc.name }}</a>
+            {% endfor %}
+            <a href="{% url 'discipline_new' %}">Add new</a>
+        </div>
+    </div>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 {% endblock %}
