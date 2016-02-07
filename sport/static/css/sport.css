@@ -63,6 +63,8 @@ h1, h2, h3, h4 {
     font-size: 70px;
 }
 
+/*LEFT MENU*/
+
 #cssmenu {
     background: #333;
     list-style: none;
@@ -101,10 +103,51 @@ h1, h2, h3, h4 {
     display: flex;
 }
 
+/*RIGHT MENU*/
+
+
+#rightpanel {
+    background: black;
+    list-style: none;
+    margin-right: 3%;
+    padding: 20px 15px 15px 15px;
+    width: 12%;
+    position: relative;
+    float:right;
+}
+
+#rightpanel li {
+    list-style: none;
+
+}
+
+#rightpanel a {
+    background: black;
+    border-bottom: 0px solid #393939;
+    color: white;
+    margin: 0;
+    /*padding: 8px 12px;*/
+    text-decoration: none;
+    font-weight: normal;
+    height: 4em;
+    font-size: medium;
+    display: flex;
+    align-items: center;
+}
+
+#rightpanel a:hover {
+    background: black url("../images/hover.gif") left center no-repeat;
+    color: #fff;
+    /*padding-bottom: 8px;*/
+    display: flex;
+}
+
+/*MAIN PANEL*/
+
 .container {
     background-color: antiquewhite;
     position: relative;
-    width: 75%;
+    width: 65%;
     margin: 0;
      overflow: hidden;
     padding: 10px 30px;
