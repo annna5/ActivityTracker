@@ -34,10 +34,14 @@
 <div id='rightpanel'>
     {% if user.is_authenticated %}
         <ul>
+            {% block rightcontent %}
+
+            {% endblock %}
+
             <li>
                 <a href="{% url 'competition_new' %}" title="New activity"><span class="glyphicon glyphicon-plus"></span></a>
             </li>
-            <li><br/><br/><br/></li>
+            <li><br/><br/></li>
             <li>
                 <a href="{% url 'django.contrib.auth.views.logout' %}" title="Log out"><span class="glyphicon glyphicon-log-out"></span></a>
 
@@ -48,7 +52,7 @@
             <li>
                 <a href="{% url 'django.contrib.auth.views.login' %}" title="Log in"><span class="glyphicon glyphicon-log-in"></span></a>
             </li>
-                        <li><br/><br/><br/></li>
+            <li><br/><br/></li>
 
             <li><a href="/accounts/register" title="Register"><span class="glyphicon glyphicon-plus-sign"></span></a>
             </li>

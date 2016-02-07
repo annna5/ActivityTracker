@@ -60,7 +60,7 @@ h1, h2, h3, h4 {
 }
 
 .glyphicon {
-    font-size: 70px;
+    font-size: 60px;
 }
 
 /*LEFT MENU*/
@@ -148,6 +148,7 @@ h1, h2, h3, h4 {
     background-color: antiquewhite;
     position: relative;
     width: 65%;
+    height: 80%;
     margin: 0;
      overflow: hidden;
     padding: 10px 30px;
