@@ -3,24 +3,28 @@
 {% block content %}
 
 
-    {% for key, values in disciplines_dict.items %}
-        <br/>
-        <div class="title-text">{{ key }}
-        <div/>
-        <br/>
 
-        <div class="title-text">Number of activities:{{ values.0 }}
-        <div/>
-        <br/>
+        <table style="width:100%" class="rows">
+        <tr class="first-row">
+            <td>Discipline</td>
+            <td>Number of activities</td>
+            <td>Distance</td>
+            <td>Time</td>
+        </tr>
+        {% for key, values in disciplines_dict.items %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ values.0 }}</td>
+                <td>{{ values.1 }} km</td>
+                <td>{{ values.2 }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 
-        <div class="title-text">Distance: {{ values.1 }} km
-        <div/>
-        <br/>
 
-        <div class="title-text">Time:{{ values.2 }}
-        <div/>
-        <br/>
 
-    {% endfor %}
+
+
+
 
 {% endblock %}
