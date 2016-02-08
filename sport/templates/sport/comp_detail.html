@@ -1,12 +1,20 @@
 {% extends 'sport/base.html' %}
 
 {% block content %}
-    <div class="comp">
-        <h1>{{ comp.name }}</h1>
-        <p>date: {{ comp.event_date }}</p>
-        <p>{{ comp.discipline }}</p>
-        <p>distance: {{ comp.distance_without_zeros }}</p>
-        <p>score: {{ comp.score }}</p>
+    <div class="cont-text-bold">{{ comp.name }}</div>
+    <br/>
+    <br/>
+    <div class="content-text">
+
+        <p>Date: {{ comp.event_date }}</p>
+        <p>Discipline: {{ comp.discipline }}</p>
+        <p>Distance: {{ comp.distance_without_zeros }}</p>
+        <p>Score: {{ comp.score }}</p>
+
+        <br/>
+        <br/>
+        <p>{{ comp.notes }}</p>
+
     </div>
 {% endblock %}
 
