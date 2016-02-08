@@ -124,9 +124,9 @@ def filtered_view_discipline(request, field):
 
 
 @login_required
-def comp_list_for_dist(request, dist):
+def comp_list_for_dist(request, dist, disc):
     competitions = Competition.objects.order_by('event_date').filter(author=request.user).filter(
-            distance=dist)
+            distance=dist, discipline__name=disc)
     return render(request, 'sport/statistics_for_specific_dist.html', {
 
         'competitions': competitions
@@ -226,8 +226,9 @@ def summary(request):
                 Sum('distance'))
         overall_time = Competition.objects.filter(author=request.user, discipline__name=disc,
                                                   event_date__lt=datetime.datetime.now()).aggregate(Sum('score'))
-        disciplines_dict[disc] = [activities_counter, _get_distance(overall_distance['distance__sum']),
-                                  _get_time(overall_time['score__sum'])]
+        if activities_counter > 0:
+            disciplines_dict[disc] = [activities_counter, _get_distance(overall_distance['distance__sum']),
+                                    _get_time(overall_time['score__sum'])]
 
     return render(request, 'sport/summary.html', {
 

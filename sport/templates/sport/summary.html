@@ -2,25 +2,33 @@
 
 {% block content %}
 
-
-    <div class="cont-text-bold">Summary of past activities</div>
-    <br/>
-    <table style="width:100%" class="rows">
-        <tr class="first-row">
-            <td>Discipline</td>
-            <td>Number of activities</td>
-            <td>Distance</td>
-            <td>Time</td>
-        </tr>
-        {% for key, values in disciplines_dict.items %}
-            <tr>
-                <td>{{ key }}</td>
-                <td>{{ values.0 }}</td>
-                <td>{{ values.1 }} km</td>
-                <td>{{ values.2 }}</td>
+    {% if disciplines_dict.items %}
+        <div class="cont-text-bold">Summary of past activities</div>
+        <br/>
+        <table style="width:100%" class="rows">
+            <tr class="first-row">
+                <td>Discipline</td>
+                <td>Number of activities</td>
+                <td>Distance</td>
+                <td>Time</td>
             </tr>
-        {% endfor %}
-    </table>
+            {% for key, values in disciplines_dict.items %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ values.0 }}</td>
+                    <td>{{ values.1 }} km</td>
+                    <td>{{ values.2 }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+
+    {% else %}
+        <br/>
+        <div class="info-text">You have no activities yet. <br/><br/>
+            To add new activity, click the plus sign.
+        </div>
+    {% endif %}
 
 
 

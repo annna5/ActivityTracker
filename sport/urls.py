@@ -10,16 +10,15 @@ urlpatterns = [
     url(r'^statistics', views.statistics, name='statistics'),
     url(r'^summary', views.summary, name='summary'),
 
-
     url(r'^disciplines/new/$', views.discipline_new, name='discipline_new'),
     url(r'^disciplines', views.disciplines, name='disciplines'),
 
     url(r'^comp_list_for_discipline/(?P<disc>\w+)/$', views.comp_list_for_discipline, name='comp_list_for_discipline'),
 
-
     # url(r'^sport/templates/sport/my_calendar.html$', views.calendar, name='my_calendar'),
     url(r'^comp/(?P<pk>[0-9]+)/$', views.comp_detail, name='comp_detail'),
-    url(r'^comp_list_for_dist/(?P<dist>[0-9]+\.[0-9]+)/$', views.comp_list_for_dist, name='comp_list_for_dist'),
+    url(r'^comp_list_for_dist/(?P<dist>[0-9]+\.[0-9]+)/(?P<disc>\w+)', views.comp_list_for_dist,
+        name='comp_list_for_dist'),
 
     url(r'^comp/new/$', views.competition_new, name='competition_new'),
 

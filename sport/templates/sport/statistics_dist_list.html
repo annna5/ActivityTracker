@@ -23,7 +23,7 @@
                             <td>{{ dist.event_date }}</td>
                             <td>{{ dist.discipline }}</td>
                             <td><a href="{% url 'comp_detail' pk=dist.pk %}">{{ dist.name }}</a></td>
-                            <td>{{ dist.distance }}</td>
+                            <td>{{ dist.distance_without_zeros }}</td>
                             <td>{{ dist.score }}</td>
                             {#            link do notatek#}
                         </tr>

@@ -2,42 +2,52 @@
 
 {% block content %}
 
-    <div class="cont-text-bold">All activities</div>
-    <br/>
-    <table style="width:100%" class="rows">
-        <tr>
-            <td>
-                <a href="{% url 'sorted_view' field='event_date' %}" title="Sort by date"><span class="glyphicon glyphicon-arrow-down"></span></a>
-            </td>
-            <td>
-
-            </td>
-            <td><a href="{% url 'sorted_view' field='name' %}" title="sort by name"><span class="glyphicon glyphicon-arrow-down"></span></a>
-            </td>
-            <td><a href="{% url 'sorted_view' field='distance' %}" title="Sort by distance"><span class="glyphicon glyphicon-arrow-down"></span></a>
-            </td>
-            <td><a href="{% url 'sorted_view' field='score' %}" title="Sort by duration"><span class="glyphicon glyphicon-arrow-down"></span></a>
-            </td>
-        </tr>
-        <tr class="first-row">
-            <td>Date</td>
-            <td>Discipline</td>
-            <td>Name</td>
-            <td>Distance</td>
-            <td>Score</td>
-            {#            link do notatek#}
-        </tr>
-        {% for comp in competitions %}
+    {% if competitions %}
+        <br/>
+        <table style="width:100%" class="rows">
             <tr>
-                <td>{{ comp.event_date }}</td>
-                <td>{{ comp.discipline }}</td>
-                <td><a href="{% url 'comp_detail' pk=comp.pk %}" title="details">{{ comp.name }}</a></td>
-                <td>{{ comp.distance_without_zeros }}</td>
-                <td>{{ comp.score }}</td>
+                <td>
+                    <a href="{% url 'sorted_view' field='event_date' %}" title="Sort by date"><span class="glyphicon glyphicon-arrow-down"></span></a>
+                </td>
+                <td>
+
+                </td>
+                <td>
+                    <a href="{% url 'sorted_view' field='name' %}" title="sort by name"><span class="glyphicon glyphicon-arrow-down"></span></a>
+                </td>
+                <td>
+                    <a href="{% url 'sorted_view' field='distance' %}" title="Sort by distance"><span class="glyphicon glyphicon-arrow-down"></span></a>
+                </td>
+                <td>
+                    <a href="{% url 'sorted_view' field='score' %}" title="Sort by duration"><span class="glyphicon glyphicon-arrow-down"></span></a>
+                </td>
+            </tr>
+            <tr class="first-row">
+                <td>Date</td>
+                <td>Discipline</td>
+                <td>Name</td>
+                <td>Distance</td>
+                <td>Score</td>
                 {#            link do notatek#}
             </tr>
-        {% endfor %}
-    </table>
+            {% for comp in competitions %}
+                <tr>
+                    <td>{{ comp.event_date }}</td>
+                    <td>{{ comp.discipline }}</td>
+                    <td><a href="{% url 'comp_detail' pk=comp.pk %}" title="details">{{ comp.name }}</a></td>
+                    <td>{{ comp.distance_without_zeros }}</td>
+                    <td>{{ comp.score }}</td>
+                    {#            link do notatek#}
+                </tr>
+            {% endfor %}
+        </table>
+
+    {% else %}
+        <br/>
+        <div class="info-text">You have no activities yet. <br/><br/>
+            To add new activity, click the plus sign.
+        </div>
+    {% endif %}
 {% endblock %}
 
 

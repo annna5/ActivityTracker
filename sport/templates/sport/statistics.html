@@ -2,11 +2,22 @@
 
 {% block content %}
 
+{% if competitions.items %}
+    <div class="cont-text">Choose distance from listed below:</div>
+    <br/>
+    <div class="dropdown">
+        <button class="dropbtn">------------</button>
+        <div class="dropdown-content">
+            {% for key, values in competitions.items %}
+                <a href="{% url 'comp_list_for_dist' dist=key disc=values.0.discipline %}">{{ key }}</a>            {% endfor %}
+        </div>
+    </div>
 
-    {% for key, values in competitions.items %}
+    {% else %}
         <br/>
-        distance: <a href="{% url 'comp_list_for_dist' dist=key %}">{{ key }}</a>
-        val: {{ values.0.discipline }}
-    {% endfor %}
+        <div class="info-text">You have no activities yet. <br/><br/>
+            To add new activity, click the plus sign.
+        </div>
+    {% endif %}
 
 {% endblock %}
