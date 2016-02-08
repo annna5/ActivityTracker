@@ -219,10 +219,13 @@ def summary(request):
     disciplines_list = Discipline.objects.all()
     disciplines_dict = {}
     for disc in disciplines_list:
-        activities_counter = len(Competition.objects.filter(author=request.user, discipline__name=disc))
-        overall_distance = Competition.objects.filter(author=request.user, discipline__name=disc).aggregate(
+        activities_counter = len(Competition.objects.filter(author=request.user, discipline__name=disc,
+                                                            event_date__lt=datetime.datetime.now()))
+        overall_distance = Competition.objects.filter(author=request.user, discipline__name=disc,
+                                                      event_date__lt=datetime.datetime.now()).aggregate(
                 Sum('distance'))
-        overall_time = Competition.objects.filter(author=request.user, discipline__name=disc).aggregate(Sum('score'))
+        overall_time = Competition.objects.filter(author=request.user, discipline__name=disc,
+                                                  event_date__lt=datetime.datetime.now()).aggregate(Sum('score'))
         disciplines_dict[disc] = [activities_counter, _get_distance(overall_distance['distance__sum']),
                                   _get_time(overall_time['score__sum'])]
 
