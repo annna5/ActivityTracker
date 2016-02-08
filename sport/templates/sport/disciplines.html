@@ -2,10 +2,10 @@
 
 {% block content %}
 
-Choose discipline form listed below:
+<div class="cont-text">Choose discipline form listed below:<div/>
     <br/>
     <div class="dropdown">
-        <button class="dropbtn">Choose</button>
+        <button class="dropbtn">------------</button>
         <div class="dropdown-content">
             {% for disc in disciplines %}
                 <a href="{% url 'filtered_view_discipline' field=disc.name %}">{{ disc.name }}</a>
@@ -14,9 +14,8 @@ Choose discipline form listed below:
     </div>
     <br/>
     <br/>
-    ...or add new one:
     <br/>
-
+    <div class="cont-text">...or add new one:<div/>    <br/>
     <a href="{% url 'discipline_new' %}"><button class="dropbtn">Add new</button></a>
     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 

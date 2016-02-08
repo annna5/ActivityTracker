@@ -9,12 +9,11 @@
     <link rel="stylesheet" href="{% static 'css/sport.css' %}">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-    <script src="script.js"></script>
 </head>
 <body>
 <div class="page-header">
     {% if user.is_authenticated %}
-        <h2 class="top-menu">Hello {{ user.username }} </h2>
+        <h2 class="top-menu">Hello {{ user.username }}!</h2>
     {% endif %}
     <h1>Activity tracker</h1>
 

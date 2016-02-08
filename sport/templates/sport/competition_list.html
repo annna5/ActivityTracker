@@ -2,38 +2,46 @@
 
 {% block content %}
 
-    <table style="width:100%">
+    <table style="width:100%" class="rows">
         <tr>
             <td>
-                <a href="{% url 'sorted_view' field='event_date' %}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+                <a href="{% url 'sorted_view' field='event_date' %}" title="Sort by date"><span class="glyphicon glyphicon-arrow-down"></span></a>
             </td>
             <td>
 
             </td>
-            <td><a href="{% url 'sorted_view' field='name' %}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+            <td><a href="{% url 'sorted_view' field='name' %}" title="sort by name"><span class="glyphicon glyphicon-arrow-down"></span></a>
             </td>
-            <td><a href="{% url 'sorted_view' field='distance' %}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+            <td><a href="{% url 'sorted_view' field='distance' %}" title="Sort by distance"><span class="glyphicon glyphicon-arrow-down"></span></a>
             </td>
-            <td><a href="{% url 'sorted_view' field='score' %}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+            <td><a href="{% url 'sorted_view' field='score' %}" title="Sort by duration"><span class="glyphicon glyphicon-arrow-down"></span></a>
             </td>
         </tr>
-        <tr>
-            <td>date</td>
-            <td>discipline</td>
-            <td>name</td>
-            <td>distance</td>
-            <td>score</td>
+        <tr class="first-row">
+            <td>Date</td>
+            <td>Discipline</td>
+            <td>Name</td>
+            <td>Distance</td>
+            <td>Score</td>
             {#            link do notatek#}
         </tr>
         {% for comp in competitions %}
             <tr>
                 <td>{{ comp.event_date }}</td>
                 <td>{{ comp.discipline }}</td>
-                <td><a href="{% url 'comp_detail' pk=comp.pk %}">{{ comp.name }}</a></td>
-                <td>{{ comp.distance }}</td>
+                <td><a href="{% url 'comp_detail' pk=comp.pk %}" title="details">{{ comp.name }}</a></td>
+                <td>{{ comp.distance_without_zeros }}</td>
                 <td>{{ comp.score }}</td>
                 {#            link do notatek#}
             </tr>
         {% endfor %}
     </table>
+{% endblock %}
+
+
+{% block rightcontent %}
+    <li>
+        <a href="{% url 'sorted_view' field='event_date' %}" title="Show summary"><span class="glyphicon glyphicon-list-alt"></span></a>
+    </li>
+    <li><br/><br/></li>
 {% endblock %}

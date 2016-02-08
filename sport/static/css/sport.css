@@ -71,7 +71,7 @@ h1, h2, h3, h4 {
     margin: 0;
     padding: 0;
     width: 20%;
-    float:left;
+    float: left;
 }
 
 #cssmenu li {
@@ -105,7 +105,6 @@ h1, h2, h3, h4 {
 
 /*RIGHT MENU*/
 
-
 #rightpanel {
     background: black;
     list-style: none;
@@ -113,7 +112,7 @@ h1, h2, h3, h4 {
     padding: 20px 15px 15px 15px;
     width: 12%;
     position: relative;
-    float:right;
+    float: right;
 }
 
 #rightpanel li {
@@ -150,11 +149,11 @@ h1, h2, h3, h4 {
     width: 65%;
     height: 80%;
     margin: 0;
-     overflow: hidden;
+    overflow: hidden;
     padding: 10px 30px;
 }
 
-.glyphicon.glyphicon-arrow-down{
+.glyphicon.glyphicon-arrow-down {
     color: black;
     background-color: antiquewhite;
     font-size: 20px;
@@ -163,12 +162,16 @@ h1, h2, h3, h4 {
 /*DROPDOWN MUENU*/
 
 .dropbtn {
-    background-color: #4CAF50;
+    background-color: #333;
     color: white;
     padding: 16px;
     font-size: 16px;
     border: none;
     cursor: pointer;
+}
+
+.dropbtn:hover {
+    background-color: black;
 }
 
 .dropdown {
@@ -181,7 +184,7 @@ h1, h2, h3, h4 {
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-content a {
@@ -191,12 +194,57 @@ h1, h2, h3, h4 {
     display: block;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
 
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
 .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+    background-color: black;
+}
+
+/*COLUMN VIEWS*/
+.first-row {
+    font-weight: bold;
+    font-size: 100%;
+
+}
+
+.rows {
+    color: black;
+    font: 100% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;
+    font-size: 90%;
+    line-height: 180%;
+}
+
+
+/*TABLE*/
+table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+}
+
+th, td {
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: floralwhite}
+
+th {
+    background-color: #333;
+    color: white;
+    text-align: center;
+}
+
+
+
+/**/
+.cont-text {
+    font: 100% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;
+    font-size: large;
 }
