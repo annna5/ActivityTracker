@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^filtered_view_discipline/(?P<field>\w+)', views.filtered_view_discipline, name='filtered_view_discipline'),
     url(r'^calendar$', views.calendar, name='calendar'),
     url(r'^statistics', views.statistics, name='statistics'),
+    url(r'^summary', views.summary, name='summary'),
 
 
     url(r'^disciplines/new/$', views.discipline_new, name='discipline_new'),

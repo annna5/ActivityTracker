@@ -1,5 +1,6 @@
 import datetime
 from django.contrib.auth.forms import UserCreationForm
+from django.db.models import Sum
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.template.context_processors import csrf
@@ -39,6 +40,7 @@ def competition_new(request):
     else:
         form = CompetitionForm()
     return render(request, 'sport/comp_edit.html', {'form': form})
+
 
 @login_required
 def discipline_new(request):
@@ -100,6 +102,7 @@ def events_from_date(request, lower):
         'competitions': competitions
     })
 
+
 @login_required
 def sorted_view(request, field):
     competitions = Competition.objects.order_by(field, 'event_date').filter(author=request.user)
@@ -109,6 +112,7 @@ def sorted_view(request, field):
         'competitions': competitions
     })
 
+
 @login_required
 def filtered_view_discipline(request, field):
     competitions = Competition.objects.order_by('event_date').filter(author=request.user, discipline__name=field)
@@ -117,6 +121,7 @@ def filtered_view_discipline(request, field):
 
         'competitions': competitions
     })
+
 
 @login_required
 def comp_list_for_dist(request, dist):
@@ -161,6 +166,7 @@ def statistics(request):
 
         'competitions': competitions
     })
+
 
 @login_required
 def disciplines(request):
@@ -207,3 +213,32 @@ def comp_list_for_discipline(request, disc):
 
         'competitions': competitions
     })
+
+
+def summary(request):
+    disciplines_list = Discipline.objects.all()
+    disciplines_dict = {}
+    for disc in disciplines_list:
+        activities_counter = len(Competition.objects.filter(author=request.user, discipline__name=disc))
+        overall_distance = Competition.objects.filter(author=request.user, discipline__name=disc).aggregate(
+                Sum('distance'))
+        overall_time = Competition.objects.filter(author=request.user, discipline__name=disc).aggregate(Sum('score'))
+        disciplines_dict[disc] = [activities_counter, _get_distance(overall_distance['distance__sum']),
+                                  _get_time(overall_time['score__sum'])]
+
+    return render(request, 'sport/summary.html', {
+
+        'disciplines_dict': disciplines_dict
+    })
+
+
+def _get_distance(dist):
+    if dist is None:
+        return 0
+    return ('%f' % dist).rstrip('0').rstrip('.')
+
+
+def _get_time(time):
+    if time is None:
+        return 0
+    return time
