@@ -4,29 +4,12 @@
 
     {% if competitions %}
         <table style="width:100%" class="rows">
-            <tr>
-                <td>
-                    <a href="{% url 'sorted_view' field='event_date' %}" title="Sort by date"><span class="glyphicon glyphicon-arrow-down"></span></a>
-                </td>
-                <td>
-
-                </td>
-                <td>
-                    <a href="{% url 'sorted_view' field='name' %}" title="sort by name"><span class="glyphicon glyphicon-arrow-down"></span></a>
-                </td>
-                <td>
-                    <a href="{% url 'sorted_view' field='distance' %}" title="Sort by distance"><span class="glyphicon glyphicon-arrow-down"></span></a>
-                </td>
-                <td>
-                    <a href="{% url 'sorted_view' field='score' %}" title="Sort by duration"><span class="glyphicon glyphicon-arrow-down"></span></a>
-                </td>
-            </tr>
             <tr class="first-row">
-                <td>Date</td>
+                <td><a href="{% url 'sorted_view' field='event_date' %}" title="Sort by date">Date</a></td>
                 <td>Discipline</td>
-                <td>Name</td>
-                <td>Distance</td>
-                <td>Score</td>
+                <td><a href="{% url 'sorted_view' field='name' %}" title="Sort by name">Name</a></td>
+                <td><a href="{% url 'sorted_view' field='distance' %}" title="Sort by distance">Distance</a></td>
+                <td><a href="{% url 'sorted_view' field='score' %}" title="Sort by score">Score</a></td>
                 {#            link do notatek#}
             </tr>
             {% for comp in competitions %}
