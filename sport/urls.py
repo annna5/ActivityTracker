@@ -6,7 +6,6 @@ urlpatterns = [
     url(r'^events_from_date/(?P<lower>[\w|\s]+)', views.events_from_date, name='events_from_date'),
     url(r'^sorted_view/(?P<field>\w+)', views.sorted_view, name='sorted_view'),
     url(r'^filtered_view_discipline/(?P<field>[\w|\s]+)', views.filtered_view_discipline, name='filtered_view_discipline'),
-    url(r'^calendar$', views.calendar, name='calendar'),
     url(r'^statistics', views.statistics, name='statistics'),
     url(r'^summary', views.summary, name='summary'),
 

@@ -131,38 +131,13 @@ def comp_list_for_dist(request, dist, disc):
     })
 
 
-# @login_required
-# def calendar(request):  # , year, month):
-#     activities = Competition.objects.order_by('event_date').filter(
-#             event_date__year=2016, event_date__month=1
-#     )
-#     cal = Calendar(activities).formatmonth(2016, 1)
-#     return render_to_response('sport/calendar.html', {'calendar': mark_safe(cal),})
-
 @login_required
-def calendar(request):  # , year, month):
+def statistics(request):  # , year, month):
     disciplines = Discipline.objects.all()
 
     return render(request, 'sport/disciplines_list.html', {
 
         'disciplines': disciplines
-    })
-
-
-@login_required
-def statistics(request):
-    distances = list(Competition.objects
-                     .filter(author=request.user).order_by()
-                     .values_list('distance', flat=True).distinct())
-    distances.sort()
-    dist_dict = {}
-    for dist in distances:
-        dist_dict[dist] = Competition.objects.filter(author=request.user).filter(distance=dist)
-
-    competitions = dist_dict
-    return render(request, 'sport/statistics.html', {
-
-        'competitions': competitions
     })
 
 
