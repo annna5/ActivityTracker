@@ -32,7 +32,6 @@ def competition_new(request):
         if form.is_valid():
             comp = form.save(commit=False)
             comp.author = request.user
-            # post.published_date = timezone.now()
             comp.save()
             return redirect('comp_detail', pk=comp.pk)
     else:
@@ -61,7 +60,6 @@ def comp_edit(request, pk):
         if form.is_valid():
             comp = form.save(commit=False)
             comp.author = request.user
-            # comp.published_date = timezone.now()
             comp.save()
             return redirect('comp_detail', pk=comp.pk)
     else:
