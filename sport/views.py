@@ -1,15 +1,13 @@
 import datetime
+
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Sum
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.template.context_processors import csrf
-from django.utils.safestring import mark_safe
-
-from sport.utils.Calendar import Calendar
-from .models import Competition, Discipline
 from .forms import CompetitionForm, DisciplineForm
-from django.contrib.auth.decorators import login_required
+from .models import Competition, Discipline
 
 
 @login_required
